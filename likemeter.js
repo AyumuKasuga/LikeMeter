@@ -7,6 +7,9 @@
 				callback: function(res){console.log(res);},
 			};
 			var options = $.extend({}, defaults, options);
+			if (typeof(options.urls) === 'string'){
+				options.urls = [options.urls];
+			}
 			var results = {};
 			var social_ok = [];
 
@@ -14,7 +17,7 @@
     			'facebook': facebook,
     			'twitter': twitter,
     			'vk': vk,
-    			'myworld': myworld
+    			'myworld': myworld,
     		}
 
     		$.each(options.urls, function(i, url){
@@ -128,8 +131,7 @@
 			    	callback([], 'myworld');
 			    })
     		}
+
         }
     });
 })(jQuery);
-
-$.LikeMeter({urls: ['http://mail.ru', 'http://yandex.ru'], networks: ['facebook', 'twitter', 'vk', 'myworld']});

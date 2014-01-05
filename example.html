@@ -2,6 +2,26 @@
 	<head>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 		<script type="text/javascript" src="likemeter.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				function pretty_print(res){
+					$.each(res, function(url, networks){
+						document.write(url + '</br>');
+						$.each(networks, function(network, value){
+							document.write(network + ': ' + value + '<br/>');
+						})
+						document.write('<br/>');
+					});
+				}
+				$.LikeMeter(
+					{
+						urls: ['http://mail.ru', 'http://yandex.ru'],
+						networks: ['facebook', 'twitter', 'vk', 'myworld'],
+						callback: pretty_print
+					}
+				);
+			});
+		</script>
 	</head>
 	<body>
 		
