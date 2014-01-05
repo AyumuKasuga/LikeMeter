@@ -13,24 +13,20 @@
     		var social = {
     			'facebook': facebook,
     			'twitter': twitter,
+    			'vk': vk
     		}
 
     		$.each(options.urls, function(i, url){
     			results[url] = {};
     			$.each(options.networks, function(i, network){
-    				results[url][network] = {}
+    				results[url][network] = undefined;
     			});
     		});
 
     		function collect_result(result, network){
     			social_ok.push(network);
     			$.each(result, function(i, res){
-    				if(res.likes){
-    					results[res.url][network]['likes'] = res.likes;
-    				}
-    				if(res.shares){
-    					results[res.url][network]['shares'] = res.shares;
-    				}
+					results[res.url][network] = res.likes;
     			});
 
     			if(social_ok.length >= options.networks.length){    				
@@ -53,7 +49,7 @@
 			    .done(function (obj){
 	    			var results = [];
 		        	$.each(obj, function(i, res){
-		        		results.push({url: res.url, likes: res.like_count, shares: res.share_count})
+		        		results.push({url: res.url, likes: res.share_count})
 		        	});
 		            callback(results, 'facebook');
 			    })
@@ -73,7 +69,7 @@
 				    })
 				    .always(function(data, status){
 				    	if(status == 'success'){
-				    		results.push({url: url, shares: data.count})
+				    		results.push({url: url, likes: data.count})
 				    	}
 				    	else{
 				    		results.push({url: url})
@@ -84,8 +80,37 @@
 				    })
     			});
     		}
+
+    		function vk(urls, callback){
+    			var results = [];
+    			VK = {
+    				Share: {
+    					count: function(idx, value){
+    						console.log(urls[idx], value);
+    						results.push({url: urls[idx], likes: value})
+    						if(Object.keys(results).length >= urls.length){
+    							console.log(results)
+				    			callback(results, 'vk');
+				    		}
+    					}
+    				}
+    			}
+    			$.each(urls, function(i, url){
+    				$.ajax({
+    					type: "GET",
+    					dataType: "jsonp",
+    					url: "https://vk.com/share.php",
+    					data: {'act': 'count', 'index': i, 'url': url}
+    				})
+    				.fail(function(data, status){
+    					if(status != 'parsererror'){
+    						results.push({url: url});
+    					}
+    				})
+    			});
+    		}
         }
     });
 })(jQuery);
 
-$.LikeMeter({urls: ['http://mail.ru', 'http://yandex.ru'], networks: ['facebook', 'twitter']});
+$.LikeMeter({urls: ['http://mail.ru', 'http://yandex.ru'], networks: ['facebook', 'twitter', 'vk']});
