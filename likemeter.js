@@ -13,7 +13,8 @@
     		var social = {
     			'facebook': facebook,
     			'twitter': twitter,
-    			'vk': vk
+    			'vk': vk,
+    			'myworld': myworld
     		}
 
     		$.each(options.urls, function(i, url){
@@ -86,10 +87,8 @@
     			VK = {
     				Share: {
     					count: function(idx, value){
-    						console.log(urls[idx], value);
     						results.push({url: urls[idx], likes: value})
     						if(Object.keys(results).length >= urls.length){
-    							console.log(results)
 				    			callback(results, 'vk');
 				    		}
     					}
@@ -109,8 +108,28 @@
     				})
     			});
     		}
+
+    		function myworld(urls, callback){
+    			var results = [];
+    			$.ajax({
+			        type: "GET",
+			        dataType: "jsonp",
+			        url: 'https://connect.mail.ru/share_count?func=?',
+			        data: {'url_list': urls.join(','), 'callback': '1'}
+			    })
+			    .done(function (obj){
+	    			var results = [];
+		        	$.each(obj, function(url, res){
+		        		results.push({url: url, likes: res.shares})
+		        	});
+		        	callback(results, 'myworld');
+			    })
+			    .fail(function(obj){
+			    	callback([], 'myworld');
+			    })
+    		}
         }
     });
 })(jQuery);
 
-$.LikeMeter({urls: ['http://mail.ru', 'http://yandex.ru'], networks: ['facebook', 'twitter', 'vk']});
+$.LikeMeter({urls: ['http://mail.ru', 'http://yandex.ru'], networks: ['facebook', 'twitter', 'vk', 'myworld']});
