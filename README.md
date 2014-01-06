@@ -4,7 +4,7 @@ jQuery plugin for create custom like counters
 
 If you want create custom like buttons, you might want to create custom like counters. This plugin will help you.
 
-Example:
+Example
 --------
 
 ```javascript
@@ -52,7 +52,12 @@ Your function will get structure like this:
 }
 ```
 
-Supported social networks:
+Examples in action
+-------------------
+* [example 1](http://htmlpreview.github.io/?https://raw.github.com/AyumuKasuga/LikeMeter/master/example.html)
+* [example 2](http://htmlpreview.github.io/?https://raw.github.com/AyumuKasuga/LikeMeter/master/example2.html)
+
+Supported social networks
 --------------------------
 
 * Facebook
