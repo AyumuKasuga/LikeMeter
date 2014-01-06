@@ -17,7 +17,9 @@ $.LikeMeter(
 );
 ```
 urls - one or more urls 
+
 networks - social networks (add only if you will use their)
+
 callback - your callback function (if you do not specify this, result will print into console)
 
 Your function will get structure like this:
