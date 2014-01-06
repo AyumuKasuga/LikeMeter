@@ -1,5 +1,5 @@
 /*
-	LikeMeter
+	LikeMeter - jQuery plugin
 */
 (function ($) {
     $.extend({
