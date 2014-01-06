@@ -22,7 +22,8 @@
     			'vk': vk,
     			'myworld': myworld,
     			'linkedin': linkedin,
-    			'odnoklassniki': odnoklassniki
+    			'odnoklassniki': odnoklassniki,
+    			'pinterest': pinterest
     		}
 
     		$.each(options.urls, function(i, url){
@@ -175,6 +176,28 @@
     						results.push({url: url, likes: parseInt(data.count)})
 							if(Object.keys(results).length >= urls.length){
 			    				callback(results, 'odnoklassniki');
+			    			}
+    					}else{
+    						results.push({url: url});
+    					}
+    				})
+    			});
+    		}
+
+    		function pinterest(urls, callback){
+    			var results = [];
+    			$.each(urls, function(i, url){
+    				$.ajax({
+    					type: 'GET',
+    					dataType: 'jsonp',
+    					url: 'https://api.pinterest.com/v1/urls/count.json',
+    					data: {'url': url},
+    				})
+    				.always(function(data, status){
+    					if(status == 'success'){
+    						results.push({url: url, likes: data.count})
+							if(Object.keys(results).length >= urls.length){
+			    				callback(results, 'pinterest');
 			    			}
     					}else{
     						results.push({url: url});
