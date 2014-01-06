@@ -1,0 +1,6 @@
+#!/bin/sh
+
+python -m jsmin likemeter.js > likemeter.min.js
+
+git add likemeter.min.js
+
