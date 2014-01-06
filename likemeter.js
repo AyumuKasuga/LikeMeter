@@ -18,6 +18,7 @@
     			'twitter': twitter,
     			'vk': vk,
     			'myworld': myworld,
+    			'linkedin': linkedin
     		}
 
     		$.each(options.urls, function(i, url){
@@ -130,6 +131,28 @@
 			    .fail(function(obj){
 			    	callback([], 'myworld');
 			    })
+    		}
+
+    		function linkedin(urls, callback){
+    			var results = [];
+    			$.each(urls, function(i, url){
+    				$.ajax({
+    					type: "GET",
+    					dataType: "jsonp",
+    					url: "https://www.linkedin.com/countserv/count/share",
+    					data: {'url': url}
+    				})
+    				.always(function(data, status){
+    					if(status == 'success'){
+    						results.push({url: data.url, likes: data.count})
+							if(Object.keys(results).length >= urls.length){
+			    				callback(results, 'linkedin');
+			    			}	
+    					}else{
+    						results.push({url: url});
+    					}
+    				})
+    			});
     		}
 
         }
