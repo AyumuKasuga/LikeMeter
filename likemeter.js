@@ -146,7 +146,7 @@
     					type: 'GET',
     					dataType: 'jsonp',
     					url: 'https://www.linkedin.com/countserv/count/share',
-    					data: {'url': url}
+    					data: {'url': url, 'format': 'jsonp'}
     				})
     				.always(function(data, status){
     					if(status == 'success'){
@@ -205,7 +205,6 @@
     				})
     			});
     		}
-
         }
     });
 })(jQuery);
