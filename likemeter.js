@@ -21,13 +21,14 @@
     			'twitter': twitter,
     			'vk': vk,
     			'myworld': myworld,
-    			'linkedin': linkedin
+    			'linkedin': linkedin,
+    			'odnoklassniki': odnoklassniki
     		}
 
     		$.each(options.urls, function(i, url){
     			results[url] = {};
     			$.each(options.networks, function(i, network){
-    				results[url][network] = undefined;
+    				results[url][network] = 0;
     			});
     		});
 
@@ -49,8 +50,8 @@
 
     		function facebook(urls, callback){
     			$.ajax({
-			        type: "GET",
-			        dataType: "jsonp",
+			        type: 'GET',
+			        dataType: 'jsonp',
 			        url: 'https://api.facebook.com/restserver.php',
 			        data: {'method': 'links.getStats', 'urls': urls, 'format': 'json'}
 			    })
@@ -70,8 +71,8 @@
     			var results = [];
     			$.each(urls, function(i, url){
 					$.ajax({
-				        type : "GET",
-	        			dataType : "jsonp",
+				        type : 'GET',
+	        			dataType : 'jsonp',
 	        			url : 'https://cdn.api.twitter.com/1/urls/count.json',
 	        			data : {'url': url},
 				    })
@@ -103,9 +104,9 @@
     			}
     			$.each(urls, function(i, url){
     				$.ajax({
-    					type: "GET",
-    					dataType: "jsonp",
-    					url: "https://vk.com/share.php",
+    					type: 'GET',
+    					dataType: 'jsonp',
+    					url: 'https://vk.com/share.php',
     					data: {'act': 'count', 'index': i, 'url': url}
     				})
     				.fail(function(data, status){
@@ -119,9 +120,10 @@
     		function myworld(urls, callback){
     			var results = [];
     			$.ajax({
-			        type: "GET",
-			        dataType: "jsonp",
-			        url: 'https://connect.mail.ru/share_count?func=?',
+			        type: 'GET',
+			        dataType: 'jsonp',
+			        url: 'https://connect.mail.ru/share_count',
+			        jsonp: 'func',
 			        data: {'url_list': urls.join(','), 'callback': '1'}
 			    })
 			    .done(function (obj){
@@ -140,9 +142,9 @@
     			var results = [];
     			$.each(urls, function(i, url){
     				$.ajax({
-    					type: "GET",
-    					dataType: "jsonp",
-    					url: "https://www.linkedin.com/countserv/count/share",
+    					type: 'GET',
+    					dataType: 'jsonp',
+    					url: 'https://www.linkedin.com/countserv/count/share',
     					data: {'url': url}
     				})
     				.always(function(data, status){
@@ -151,6 +153,29 @@
 							if(Object.keys(results).length >= urls.length){
 			    				callback(results, 'linkedin');
 			    			}	
+    					}else{
+    						results.push({url: url});
+    					}
+    				})
+    			});
+    		}
+
+    		function odnoklassniki(urls, callback){
+    			var results = [];
+    			$.each(urls, function(i, url){
+    				$.ajax({
+    					type: 'GET',
+    					dataType: 'jsonp',
+    					url: 'https://odnoklassniki.ru/dk',
+    					jsonp: 'cb',
+    					data: {'st.cmd': 'shareData', 'ref': url},
+    				})
+    				.always(function(data, status){
+    					if(status == 'success'){
+    						results.push({url: url, likes: parseInt(data.count)})
+							if(Object.keys(results).length >= urls.length){
+			    				callback(results, 'odnoklassniki');
+			    			}
     					}else{
     						results.push({url: url});
     					}

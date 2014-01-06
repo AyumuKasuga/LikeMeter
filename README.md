@@ -11,7 +11,7 @@ Example
 $.LikeMeter(
     {
         urls: ['http://mail.ru', 'http://yandex.ru', 'http://google.com'],
-        networks: ['facebook', 'twitter', 'vk', 'myworld', 'linkedin'], 
+        networks: ['facebook', 'twitter', 'vk', 'myworld', 'linkedin', 'odnoklassniki'], 
         callback: your_callback_function
     }
 );
@@ -30,7 +30,8 @@ Your function will get structure like this:
         linkedin: 10977,
         myworld: 491,
         twitter: 7485,
-        vk: 4312
+        vk: 4312,
+        odnoklassniki: 100500
     },
     'http://yandex.ru': 
     {
@@ -38,7 +39,8 @@ Your function will get structure like this:
         linkedin: 173,
         myworld: 1757,
         twitter: 1053,
-        vk: 2458
+        vk: 2458,
+        odnoklassniki: 100500
     },
     'http://mail.ru': 
     {
@@ -46,7 +48,8 @@ Your function will get structure like this:
         linkedin: 764,
         myworld: 116579,
         twitter: 120789,
-        vk: 58929
+        vk: 58929,
+        odnoklassniki: 100500
     },
     
 }
@@ -65,3 +68,4 @@ Supported social networks
 * Мой мир (http://my.mail.ru/)
 * Twitter
 * Vkontakte (vk.com)
+* Odnoklassniki (http://www.odnoklassniki.ru/) (only over http)
