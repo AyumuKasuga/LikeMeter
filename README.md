@@ -17,7 +17,7 @@ $.LikeMeter(
 );
 ```
 paramaters description:
-* urls - one or more urls 
+* urls - one or more urls (with http:// or https://)
 * networks - social networks (add only if you will use their)
 * callback - your callback function (if you do not specify this, result will print into console)
 
