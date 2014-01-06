@@ -5,17 +5,32 @@
 		<script type="text/javascript">
 			$(document).ready(function(){
 				function pretty_print(res){
+					console.log(res);
 					$.each(res, function(url, networks){
-						document.write(url + '</br>');
+						table = $('<table>').css({'margin-bottom': '25px'});
+						table.prepend($('<h3>').text(url).css({'margin-bottom': '0'}))
+						table.append(
+							$('<tr>').append(
+								$('<th>').html('<b>network</b>')
+							).append(
+								$('<th>').html('<b>likes</b>')
+							)
+						)
 						$.each(networks, function(network, value){
-							document.write(network + ': ' + value + '<br/>');
+							table.append(
+								$('<tr>').append(
+									$('<td>').text(network)
+								).append(
+									$('<td>').text(value)
+								)
+							);
 						})
-						document.write('<br/>');
+						$('#content').append(table);
 					});
 				}
 				$.LikeMeter(
 					{
-						urls: ['http://mail.ru', 'http://yandex.ru'],
+						urls: ['http://mail.ru', 'http://yandex.ru', 'http://google.com'],
 						networks: ['facebook', 'twitter', 'vk', 'myworld', 'linkedin'],
 						callback: pretty_print
 					}
@@ -24,6 +39,6 @@
 		</script>
 	</head>
 	<body>
-		
+		<div id='content'></div>
 	</body>
 </html>
