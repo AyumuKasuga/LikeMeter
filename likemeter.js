@@ -1,3 +1,6 @@
+/*
+	LikeMeter
+*/
 (function ($) {
     $.extend({
         LikeMeter: function (options) {
@@ -24,7 +27,7 @@
     		$.each(options.urls, function(i, url){
     			results[url] = {};
     			$.each(options.networks, function(i, network){
-    				results[url][network] = 0;
+    				results[url][network] = undefined;
     			});
     		});
 
