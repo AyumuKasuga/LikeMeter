@@ -24,7 +24,7 @@
     		$.each(options.urls, function(i, url){
     			results[url] = {};
     			$.each(options.networks, function(i, network){
-    				results[url][network] = undefined;
+    				results[url][network] = 0;
     			});
     		});
 
