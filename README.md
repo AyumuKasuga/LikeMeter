@@ -73,3 +73,6 @@ Supported social networks
 * Vkontakte (vk.com)
 * Odnoklassniki (http://www.odnoklassniki.ru/) (only over http)
 * Pinterest
+
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/fc9031cd53134fedfbd6cd22bac81cbb "githalytics.com")](http://githalytics.com/AyumuKasuga/LikeMeter)
