@@ -16,6 +16,18 @@
             var results = {};
             var social_ok = [];
 
+            if (!Object.keys) { // for old IE 
+                Object.keys = function(obj) {
+                    var keys = [];
+                    for (var i in obj) {
+                        if (obj.hasOwnProperty(i)) {
+                            keys.push(i);
+                        }
+                    }
+                    return keys;
+                };
+            }
+
             var social = {
                 'facebook': facebook,
                 'twitter': twitter,
