@@ -16,9 +16,9 @@ $.LikeMeter(
     }
 );
 ```
-paramaters description:
+parameters explanation:
 * urls - one or more urls (with http:// or https://)
-* networks - social networks (add only if you will use their)
+* networks - social networks (add only the ones you will use)
 * callback - your callback function (if you do not specify this, result will print into console)
 
 Your function will get structure like this:
@@ -73,3 +73,6 @@ Supported social networks
 * Vkontakte (vk.com)
 * Odnoklassniki (http://www.odnoklassniki.ru/) (only over http)
 * Pinterest
+
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/fc9031cd53134fedfbd6cd22bac81cbb "githalytics.com")](http://githalytics.com/AyumuKasuga/LikeMeter)
